@@ -55,6 +55,13 @@ PESAPAL_SECRET=yourConsumerSecret
 PESAPAL_IS_LIVE=false
 PESAPAL_CALLBACK_URL=
 ```  
+## Migrations  
+
+If you are not going to use Pesapal default migrations, you should call the `PesapalConfig::ignoreMigrations` method in the register method of your `AppServiceProvider`. You may export the default migrations using 
+
+```bash
+php artisan vendor:publish --tag=pesapal-migrations.
+```
 
 Thereafter, run the migration command as the package will load a database migration that stores the payment records    
 

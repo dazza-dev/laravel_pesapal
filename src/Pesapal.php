@@ -49,13 +49,6 @@ class Pesapal
     private OAuthConsumer $consumer;
 
     /**
-     * Indicates if Pesapal migrations will be run.
-     *
-     * @var bool
-     */
-    public static $runsMigrations = true;
-
-    /**
      * Pesapal constructor.
      *
      * @param OAuthSignatureMethod_HMAC_SHA1 $signature
@@ -220,17 +213,5 @@ class Pesapal
 
         curl_close($ch);
         return $elements[1];
-    }
-
-    /**
-     * Configure Pesapal to not register its migrations.
-     *
-     * @return static
-     */
-    public static function ignoreMigrations()
-    {
-        static::$runsMigrations = false;
-
-        return new static;
     }
 }
