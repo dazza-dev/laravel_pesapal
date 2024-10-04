@@ -23,6 +23,10 @@ class PesapalServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/config/pesapal.php' => config_path('pesapal.php'),
             ], 'pesapal-config');
+    
+            $this->publishes([
+                __DIR__.'/database/migrations' => database_path('migrations'),
+            ], 'pesapal-migrations');
         }
 
         // Load middleware alias
@@ -54,6 +58,9 @@ class PesapalServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__.'/resources/views', 'laravel_pesapal');
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
+        if ($this->app->runningInConsole() && Pesapal::$runsMigrations) {
+            $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        }
     }
 }
